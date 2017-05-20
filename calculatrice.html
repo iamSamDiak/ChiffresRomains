@@ -37,8 +37,6 @@
         function chiffresRomains() {
             //je recupère la valeur de l'input.
             var valeur = input.value;
-            //
-            var tailleV;
             /*
             En chiffres romains, chaque chiffre/nombre est représenté par une lettre (sans blague...).
             */
@@ -91,7 +89,7 @@
         function caracteresNonAcceptes() {
             var valeur = input.value;
             for (i = 0; i < valeur.length; i++) {
-                if (valeur[i] == NaN) {
+                if (valeur[i] == "a") {
                     p.textContent = "'" + valeur[i] + "' n'est pas un chiffre romain !";
                 }
             }
