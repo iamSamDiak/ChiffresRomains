@@ -1,4 +1,4 @@
-<h3>Démo de l'appliction</h3>
+<h3>Démo de l'application</h3>
 
 <p>
 Les nombres en format romain sont convertits en format arabe<br/>
