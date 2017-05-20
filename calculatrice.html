@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" value="">
+    <button style="padding:10px"></button>
+    <p></p>
+    <span></span>
+    <script>
+    
+        var input = document.querySelector("input");
+        var btn = document.querySelector("button");
+        var p = document.querySelector("p");
+        var span = document.querySelector("span");
+        
+        /**
+        I = 1
+        V = 5
+        X = 10
+        L = 50
+        C = 100
+        D = 500
+        M = 1000
+        */
+        
+        var i, v, x, l, c, d, m;
+        
+        var nombres;
+        var resultat;
+        
+        /*
+        La fonction "chiffresRomains" permet de convertir les chiffres romains en chiffres arabes.
+        */
+        function chiffresRomains(){
+            //je recupère la valeur de l'input.
+            var valeur = input.value;
+            //p est une chaîne de caractères vide pour pouvoir ajouter des caractères et non les écraser.
+            p.textContent = "";
+            /*
+            En chiffres romains, chaque chiffre/nombre est représenté par une lettre (sans blague...)
+            */
+            for (let j = 0; j < valeur.length; j++){
+                switch (valeur[j]){                   
+                    case "i" :
+                    case "I" :
+                        i = 1;
+                        p.textContent += i;
+                        break;
+                    case "v" :
+                    case "V" :
+                        v = 5;
+                        p.textContent += v;
+                        break;
+                    case "x" : 
+                    case "X" :
+                        x = 10;
+                        p.textContent += x;
+                        break;
+                    case "l" : 
+                    case "L" :
+                        l = 50;
+                        p.textContent += l;
+                        break;
+                    case "c" : 
+                    case "C" :
+                        c = 100;
+                        p.textContent += c;
+                        break;
+                    case "d" :
+                    case "D" :
+                        d = 500;
+                        p.textContent += d;
+                        break;
+                    case "m" : 
+                    case "M" :
+                        m = 1000;
+                        p.textContent += 1000;
+                        break;
+                    default:
+                        p.textContent = "'" + valeur[j] + "' N'est-pas un chiffre romain !";
+                }
+            }
+        }
+        
+        function calcul(){
+            //je récupère la VALEUR de l'input
+            var valeur = input.value;
+            //je sépare les charactères(chiffres) par une chaine vide !Pour utiliser des nombres, mettre un espace!
+            nombres = valeur.split(" ");
+            //je push un 0 à la fin du tableau "nombre", il nous servira à arrêter la boucle.
+            nombres.push(0);
+            //enfin, je convertis tous les chiffres et/ou nombres en entier.
+            for (i = 0; i < nombres.length; i++){
+                nombres[i] = parseInt(nombres[i]);
+            }
+            //le résulat prend la première valeur du tableau.
+            resultat = nombres[0];
+            
+            //le calcul commence !
+            for (i = 0; i < nombres.length; i++){
+                /*
+                En chiffres romains, deux chiffres décroissants sont additionner et deux chiffres croissants sont soustraits
+                donc, si i est plus petit que le chiffre avant ET après lui...
+                */
+                if (nombres[i] < nombres[i+1] && nombres[i] < nombres[i-1]){
+                    //résultat prend la valeur qui est avant notre i
+                    resultat = nombres[i-1];
+                    //(pour voir le calcul)
+                    console.log(resultat + " + (" +(relative(nombres[i]) + " + " + nombres[i+1] + ")"));
+                    //la fonction "relative" rend un chiffre/nombre positif négatif
+                    resultat = resultat + (relative(nombres[i]) + nombres[i+1]);
+                    //voir le résultat
+                    console.log(resultat);
+                /*
+                Si i est seulement plus petit que le i qui le suit
+                */
+                } else if (nombres[i] < nombres[i+1]) {
+                    //voir le calcul
+                    console.log(relative(resultat) + " + " + nombres[i+1]);
+                    //calcul...
+                    resultat = relative(resultat) + nombres[i+1];
+                    //voir le résultat
+                    console.log(resultat);
+                /*
+                Si i est supérieur au i qui le suit...
+                */
+                } else {
+                    //voir le calcul
+                    console.log(resultat + " + " + nombres[i+1]);
+                    //calcul...
+                    resultat += nombres[i+1];
+                    //voir le résultat
+                    console.log(resultat);
+                }
+                /*
+                Enfin si l'avant dernier i rencontre le dernier i (0), 
+                ils s'additionnent et la boucle s'arrête.
+                */
+                if (nombres[i+1] == 0){
+                    break;
+                }
+                //le résultat sort dans p
+                p.textContent = resultat;
+            }
+        };
+        
+        //la fonction relative qui rend négatif un chiffre/nombre positif
+        function relative(a){
+            a = parseInt(a);
+	       return a - (a * 2);
+        }
+        
+        /*
+        Activez un événement à la fois, ils ne marchent pas encore ensembles.
+        */
+        btn.addEventListener("click", calcul);
+        //input.addEventListener("keyup", chiffresRomains);
+        
+    </script>
+    
+</body>
+</html>
