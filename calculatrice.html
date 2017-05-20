@@ -9,7 +9,7 @@
     <input type="text" value="">
     <button style="padding:10px"></button>
     <p></p>
-    <span></span>
+    <span style="color:red"></span>
     <script>
     
         var input = document.querySelector("input");
@@ -29,7 +29,7 @@
         
         var i, v, x, l, c, d, m;
         
-        var nombres;
+        var nombres = [];
         var resultat;
         
         /*
@@ -49,41 +49,48 @@
                     case "I" :
                         i = 1;
                         p.textContent += i;
+                        nombres.push(i);
                         break;
                     case "v" :
                     case "V" :
                         v = 5;
                         p.textContent += v;
+                        nombres.push(v);
                         break;
-                    case "x" : 
+                    case "x" :q
                     case "X" :
                         x = 10;
                         p.textContent += x;
+                        nombres.push(x);
                         break;
                     case "l" : 
                     case "L" :
                         l = 50;
                         p.textContent += l;
+                        nombres.push(l);
                         break;
                     case "c" : 
                     case "C" :
                         c = 100;
                         p.textContent += c;
+                        nombres.push(c);
                         break;
                     case "d" :
                     case "D" :
                         d = 500;
                         p.textContent += d;
+                        nombres.push(d);
                         break;
                     case "m" : 
                     case "M" :
                         m = 1000;
                         p.textContent += 1000;
+                        nombres.push(m);
                         break;
                     default:
                         p.textContent = "'" + valeur[j] + "' N'est-pas un chiffre romain !";
                 }
-            }
+            }span.textContent = "[" + nombres + "]";
         }
         
         function calcul(){
@@ -103,7 +110,7 @@
             //le calcul commence !
             for (i = 0; i < nombres.length; i++){
                 /*
-                En chiffres romains, deux chiffres décroissants sont additionnés et deux chiffres croissants sont soustraits
+                En chiffres romains, deux chiffres décroissants sont additionner et deux chiffres croissants sont soustraits
                 donc, si i est plus petit que le chiffre avant ET après lui...
                 */
                 if (nombres[i] < nombres[i+1] && nombres[i] < nombres[i-1]){
@@ -157,8 +164,8 @@
         /*
         Activez un événement à la fois, ils ne marchent pas encore ensembles.
         */
-        btn.addEventListener("click", calcul);
-        //input.addEventListener("keyup", chiffresRomains);
+        //btn.addEventListener("click", calcul);
+        input.addEventListener("keyup", chiffresRomains);
         
     </script>
     
