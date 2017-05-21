@@ -77,8 +77,12 @@
                     m = 1000;
                     nombres.push(m);
                     break;
-                case undefined :
-                    p.textContent = "";
+                default:
+                    /*
+                    Si un chiffre non romain est écrit, on push dans le tableau au hasard un nombre erreur
+                    (01019) pour sortir une erreur.
+                    */
+                    nombres.push(01019);
                     break;
                 }
             }
@@ -110,6 +114,9 @@
                 } else if (valeur[i] == " ") {
                     p.textContent = "Assurez-vous de ne pas mettre d'espace !";
                 }
+            }
+            if (valeur.length == 0) {
+                p.textContent = "";
             }
         }
 
@@ -153,6 +160,11 @@
                     /*
                     Si i est supérieur au i qui le suit...
                     */
+                } else if (nombres[i] == 01019) {
+                    //si 01019, le nombre erreur est détecté, la boucle s'arrête est un message d'erreur apparaît.
+                    p.textContent = "Erreur ! Assurez-vous d'avoir entré que des chiffres romains et pas d'espaces.";
+                    nombres = [];
+                    break;
                 } else {
                     //voir le calcul.
                     console.log(resultat + " + " + nombres[i + 1]);
@@ -167,6 +179,7 @@
                 */
                 if (nombres[i + 1] == 0) {
                     p.textContent = resultat;
+                    nombres = [];
                     break;
                 }
                 /*
@@ -174,6 +187,7 @@
                 */
             }
         }
+
 
         //la fonction relative qui rend négatif un chiffre/nombre positif.
         function relative(a) {
@@ -183,11 +197,6 @@
 
         btn.addEventListener("click", calcul);
         input.addEventListener("keyup", caracteresNonAcceptes);
-        input.addEventListener("focus", function () {
-            p.textContent = "";
-            nombres = [];
-            input.value = "";
-        });
     </script>
 
 </body>
