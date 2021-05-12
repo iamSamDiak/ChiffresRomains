@@ -1,5 +1,5 @@
 # <h1>NVMERATO</h1>
 
-Converts romans numberals into arabic numberals.
+Convertit les chiffres romans en chiffres arabes.
 
 Algorithm is in `public/js`
